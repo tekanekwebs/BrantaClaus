@@ -891,20 +891,27 @@
                 color: var(--ink);
             }
             .branta .no { display: inline-block; transform: none; }
-            /* phones: slightly smaller video and headline so the text never runs behind the video */
+            /* phones + tablets: keep the headline in its own column so it never touches or hides behind the video */
+            @media (max-width: 1099px) {
+                .m-branta { width: min(54vw, 460px); }
+                .copy { padding-right: calc(min(54vw, 460px) - var(--mpad, 20px) + 14px); box-sizing: border-box; }
+                .santa .label, .santa .ho, .branta .label, .branta .no-line, .branta .no { overflow-wrap: break-word; }
+            }
             @media (max-width: 699px) {
-                .m-branta { width: min(64vw, 520px); }
-                .unit { --pw: clamp(56px, 16vw, 130px); } /* pointing-Santa image = 1/4 of the video width */
+                .m-branta { width: 50vw; }
+                .copy { padding-right: calc(50vw - var(--mpad, 20px) + 12px); }
+                .unit { --pw: 12.5vw; } /* pointing-Santa image stays 1/4 of the video width */
+                /* upper content and the Enter section sit closer together, group centred with equal space above and below */
+                .content { justify-content: center; min-height: 0; gap: 36px; padding-top: 0; padding-bottom: 0; }
                 .unit .bubble { font-size: clamp(11px, 3.1vw, 15px); min-height: 0; padding: 7px 8px 7px 12px; border-radius: 14px; }
                 .unit .bubble .go { width: auto; padding-left: 4px; font-size: 1em; }
-                .santa .label, .santa .ho, .branta .label, .branta .no-line, .branta .no { font-size: clamp(24px, 6.8vw, 40px); }
+                .santa .label, .santa .ho, .branta .label, .branta .no-line, .branta .no { font-size: clamp(16px, 4.7vw, 30px); }
             }
         
-            /* ---------- phone/tablet: keep the speed link clear of the Enter button ---------- */
+            /* ---------- phone/tablet: move ONLY the Enter button (and its Santa) down so the speed menu has room.
+               Uses top offset, so nothing else in the layout shifts. ---------- */
             @media (max-width: 1099px) {
-                .m-branta { --spd-top: calc(100% + 4px); }
-                .spd-t { padding: 6px 2px; }
-                .unit { margin-top: 44px; }
+                .unit { top: 40px; }
             }
         </style>
 
@@ -1748,7 +1755,7 @@
                 </button>
                 <nav class="menu" id="menu" aria-label="Primary">
                     <a href="#home" aria-current="true">Home</a>
-                    <a href="#story" title="The Miracle of Branta Claus. A Bedtime Story. (A very novel novel)">The Miracle</a>
+                    <a href="#story" title="The Miracle of Branta Claus. A Bedtime Story. (A very novel novel)">The Miracle of Branta Claus</a>
                     <a href="#elf">Meet Our Elf</a>
                     <a href="#gallery">Gallery</a>
                     <a href="#b-rants">B-Rants</a>
